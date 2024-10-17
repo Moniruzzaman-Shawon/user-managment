@@ -16,7 +16,22 @@ function App() {
     const form = event.target;
     const name = form.name.value;
     const salary = form.salary.value;
-    console.log(name, salary);
+    const user = { name, salary };
+    console.log(user);
+
+    fetch("http://localhost:4000/users", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(user),
+    })
+      .then(res => res.json())
+      .then(data => {
+        const newUser = [...user, data];
+        setUsers(newUser);
+        form.reset();
+      })
 
   }
 
