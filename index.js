@@ -1,6 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 4000;
+
+//middleware
+app.use(cors());
+app.use(express.json());
 
 const users = [
     { id: 1, name: 'Alice', salary: 3000 },
@@ -16,6 +21,12 @@ app.get('/', (req, res) => {
 
 app.get('/users', (req, res) => {
     res.send(users);
+})
+
+app.post('/users', (req, res) => {
+    console.log("API");
+
+    console.log(req.body);
 })
 
 app.listen(port, () => {
